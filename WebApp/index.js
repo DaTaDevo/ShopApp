@@ -17,7 +17,8 @@ const inputEl = document.getElementById("input-field");
 const listEl = document.getElementById("shopping-list");
 const imgEl = document.querySelector("img")
 const originalImagePath = "assets/girl-rmbg.png"
-const easterEggImagePath = "assets/ramen_girl.png";
+const easterEggImagePath = "assets/ramen_girl.png"
+const noodlesEasterEgg = "assets/noodles_girl.jpg";
 let locStoIsNull = true;
 let itemID = {
         if(){ // check if locSto is null; yes - we set IDnum to 0, no - set IDnum to last+1 key number
@@ -32,6 +33,13 @@ const push = (database, value) => {
 
 addBtn.addEventListener("click", function () {
     let inputValue  = inputEl.value;
+
+    // Change front image to girl whith noodles if input is "noodles"
+    if(inputValue.toLowerCase() == 'noodles') {imgEl.src = noodlesEasterEgg;}
+
+    // Change image back to default if input something else
+    else{imgEl.src = originalImagePath }
+
     push(localStorage, inputValue);
     
     console.log(inputValue);
