@@ -18,22 +18,29 @@ const listEl = document.getElementById("shopping-list");
 const imgEl = document.querySelector("img")
 const originalImagePath = "assets/girl-rmbg.png"
 const easterEggImagePath = "assets/ramen_girl.png";
-let locStoIsNull = true;
-let itemID = {
-        if(){ // check if locSto is null; yes - we set IDnum to 0, no - set IDnum to last+1 key number
-            console.log(Object.keys(localStorage)[localStorage-1]) // getting the key of the last item
-        }
+const getIDnumber = () => {
+    if(localStorage.length == 0){ // check if locSto is null; yes - we set IDnum to 0, no - set IDnum to last+1 key number
+            
+        console.log("Local Storage is null");
+        return 0;
+
+    }else {
+        return localStorage.length;
     }
+}
+
+let itemID = getIDnumber();
 
 const push = (database, value) => {
-    database.setItem("1", value);
+    itemID++; 
+    database.setItem(itemID, value);
 }
 
 
 addBtn.addEventListener("click", function () {
     let inputValue  = inputEl.value;
     push(localStorage, inputValue);
-    
+    addNewItem()
     console.log(inputValue);
     clearInputFieldReference();
 })
