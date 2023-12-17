@@ -1,4 +1,4 @@
-
+<meta character = "UTF-8"> 
 
 <h1> 🍙 ShoppApp </h1>
 
