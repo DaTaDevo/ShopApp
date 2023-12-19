@@ -75,6 +75,13 @@ addBtn.addEventListener("click", function () {
     clearInputFieldReference();
 })
 
+inputEl.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        addBtn.click();
+    }
+});
+
 function clearInputFieldReference(){
     return inputEl.value = "";
 }
