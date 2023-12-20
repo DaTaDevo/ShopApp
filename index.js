@@ -81,35 +81,6 @@ function clearListEl (){
     listEl.innerHTML = ""; //clearing list before updating data
 }
 
-
- const callUpdateLocSto = () => {
-    console.log("In call Update function"); //<--- WARNING LOG
-        clearListEl();
-        
-        if(locStoIsEmpty){
-        console.log(locStoIsEmpty);
-            const shoppingArray = Object.entries(localStorage); // return object and get values from that object and turn them in to array
-            for(let currentItem of shoppingArray){
-
-                let currentItemID = currentItem[0];
-                let currentItemValue = currentItem[1]
-                
-                if(currentItemValue.toLowerCase() === 'ramen') {
-
-                    imgEl.src = easterEggImagePath;
-                }
-
-                console.log("ID:" + currentItemID); //<--- WARNING LOG
-                console.log("Value:" + currentItemValue); //<--- WARNING LOG
-
-                addNewItem(currentItem);
-            }
-        }else {
-            imgEl.src = originalImagePath;
-            listEl.innerHTML = "No items here... yet :)"
-        }
-
-    }
  function callUpdateLocSto() { // calls LocalStorage to update the list
 
     console.log("callUpdateLocSto(): In call Update function"); //<--- WARNING LOG
