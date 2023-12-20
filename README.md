@@ -34,4 +34,4 @@
 | favicon_io | stores icons |
 | pixeloid-font | stores main font |
 
-<sub> Developed with creativity and heart by The Lazy Programers Team </sub>
+<sub> Developed with creativity and love by The Lazy Programers Team </sub>
