@@ -21,18 +21,12 @@ const getIDnumber = () => {
     }
 }
 
-const inputItem = {  // (in progress feature) buffer for current item the program is working with 
-    value: "",
-    ID : null
-}
-
 let globalItemIDNumber = getIDnumber(); // stores ID of last item in database
 
 const push = (database, value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
     database.setItem(globalItemIDNumber, value);
     callUpdateLocSto();
-    return globalItemIDNumber;
 }
 
 const remove = (itemID) => {
@@ -41,8 +35,7 @@ const remove = (itemID) => {
 }
 
 addBtn.addEventListener("click", function () {
-    inputItem.value  = inputEl.value;
-    inputItem.ID = push(localStorage, inputItem.value);
+    push(localStorage, inputEl.value);
     clearInputFieldReference();
 })
 
