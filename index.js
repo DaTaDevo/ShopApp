@@ -1,11 +1,8 @@
-
 const addBtn = document.getElementById("add-button");
 const inputEl = document.getElementById("input-field");
 const listEl = document.getElementById("shopping-list");
 const imgEl = document.querySelector("img")
 const originalImagePath = "assets/girl-rmbg.png"
-const easterEggImagePath = "assets/ramen_girl.png"
-const noodlesEasterEgg = "assets/noodles_girl.jpg";
 const easterEggRamenImagePath = "assets/ramen_girl.png";
 // ADD NEW EASTER EGGG FOR NOODELS PATH TO IMAGE HERE 
 
@@ -44,25 +41,8 @@ const remove = (itemID) => {
 }
 
 addBtn.addEventListener("click", function () {
-    let inputValue  = inputEl.value;
-
-    // Change front image to girl whith noodles if input is "noodles"
-    if(inputValue.toLowerCase() == 'noodles') {imgEl.src = noodlesEasterEgg;}
-
-    // Change image back to default if input something else
-    else{imgEl.src = originalImagePath }
-
-    push(localStorage, inputValue);
-    addNewItem()
-    console.log(inputValue);
-
     inputItem.value  = inputEl.value;
     inputItem.ID = push(localStorage, inputItem.value);
-    addNewItem(inputItem);
-
-    inputItem.value  = inputEl.value;
-    inputItem.ID = push(localStorage, inputItem.value);
-
     clearInputFieldReference();
 })
 
@@ -74,13 +54,16 @@ inputEl.addEventListener("keypress", function(event) {
 });
 
 function clearInputFieldReference(){
+
     return inputEl.value = "";
+
 }
+
 function clearListEl (){
     
     listEl.innerHTML = ""; //clearing list before updating data
 }
-
+ 
  function callUpdateLocSto() { // calls LocalStorage to update the list
 
     console.log("callUpdateLocSto(): In call Update function"); //<--- WARNING LOG
@@ -126,15 +109,11 @@ function addNewItem(itemID, itemValue){
 
     li.append(itemValue);
     listEl.append(li);
-
     
+    li.addEventListener("dblclick", function () {     
 
-// Rewrite for LOCALSTORAGE
-    li.addEventListener("dblclick", function () {       
-    
         remove(itemID);
     })
 }
 
 document.addEventListener("DOMContentLoaded", callUpdateLocSto());
-
