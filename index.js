@@ -76,7 +76,7 @@ function clearListEl (){
 
                 imgEl.src = easterEggRamenImagePath;
 
-            } // ADD NOODLES EASTER EGG HERE ______________
+            } // ADD NOODLES EASTER EGG HERE ______________ @Paul
 
             //--- LOGING DATA OUT ---
             console.log("callUpdateLocSto(): ID:" + currentItemID);
