@@ -119,7 +119,7 @@ function addNewItem(itemID, itemValue){
 
     li.append(itemValue);
     listEl.append(li);
-// _________________ Remove Function _________________
+    
     li.addEventListener("dblclick", function () {     
 
         remove(itemID);
