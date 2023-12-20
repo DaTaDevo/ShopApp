@@ -13,7 +13,6 @@
 <h3>Technologies used.</h3>
 
 * HTML/CSS/JavaScript - Front-end
-* Node.js - Back-end (IP)
 
 
 <h3> Files.</h3>
