@@ -22,8 +22,8 @@ const getIDnumber = () => {
 }
 
 const inputItem = {  // (in progress feature) buffer for current item the program is working with 
-    "value": "",
-    "ID" : null
+    value: "",
+    ID : null
 }
 
 let globalItemIDNumber = getIDnumber(); // stores ID of last item in database
