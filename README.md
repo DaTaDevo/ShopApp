@@ -6,3 +6,30 @@
 
 
 <p> A Progressive Web App that helps to keep track of shopping items with the Japanese Anime Mood. (* ^ ω ^) </p>
+
+---
+<h2>About code structure </h2>
+
+<h3>Technologies used.</h3>
+
+* HTML/CSS/JavaScript - Front-end
+* Node.js - Back-end (IP)
+
+
+<h3> Files.</h3>
+
+| File name | Function |
+| ---------- | ---------- |
+| index.html | main markup file |
+| index.css | main styling file |
+| index.js | main scripting file |
+| branchlog.txt | text file that stores a history on created branches during the development and explains what each branch added/fixed |
+
+
+<h3> Folders.</h3>
+
+| Folder name | Function |
+| ---------- | ---------- |
+| assets | stores home pictures |
+| favicon_io | stores icons |
+| pixeloid-font | stores main font |
