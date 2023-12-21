@@ -6,36 +6,23 @@ const originalImagePath = "assets/girl-rmbg.png"
 const easterEggRamenImagePath = "assets/ramen_girl.png";
 // ADD NEW EASTER EGGG FOR NOODELS PATH TO IMAGE HERE 
 
-const locStoIsEmpty = () =>{ return localStorage.length == 0;}
+const locStoIsEmpty = () => (localStorage.length == 0);
 
-const getIDnumber = () => {
-    if(locStoIsEmpty()){ // check if locSto is null; yes - we set IDnum to 0, no - set IDnum to length of the Local Storage
-        
-        console.log("getIDnumber(): Local Storage is null"); //<--- WARNING LOG
-        return 0;
-        
-    }else {
+let globalItemIDNumber = localStorage.length; // stores ID of last item in database
 
-        return localStorage.length;
-
-    }
-}
-
-let globalItemIDNumber = getIDnumber(); // stores ID of last item in database
-
-const push = (database, value) => { // pushes value to the localStorage and returns its ID number in localStorage
+const pushToLocSto = (value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
-    database.setItem(globalItemIDNumber, value);
+    localStorage.setItem(globalItemIDNumber, value);
     callUpdateLocSto();
 }
 
-const remove = (itemID) => {
+const removeFromLocSto = (itemID) => {
     localStorage.removeItem(itemID);
     callUpdateLocSto();
 }
 
 addBtn.addEventListener("click", function () {
-    push(localStorage, inputEl.value);
+    pushToLocSto(inputEl.value);
     clearInputFieldReference();
 })
 
@@ -59,14 +46,14 @@ function clearListEl (){
  
  function callUpdateLocSto() { // calls LocalStorage to update the list
 
-    console.log("callUpdateLocSto(): In call Update function"); //<--- WARNING LOG
+
     clearListEl();
         
     if(!locStoIsEmpty()){
 
         console.log("callUpdateLocSto(): LS length is " + localStorage.length);
-        const shoppingArray = Object.entries(localStorage); // gets all elements from localStorage to our array
 
+        const shoppingArray = Object.entries(localStorage); // gets all elements from localStorage to our array
         for(let currentItem of shoppingArray){
 
             let currentItemID = currentItem[0];
@@ -77,11 +64,8 @@ function clearListEl (){
                 imgEl.src = easterEggRamenImagePath;
 
             } // ADD NOODLES EASTER EGG HERE ______________ @Paul
-
-            //--- LOGING DATA OUT ---
-            console.log("callUpdateLocSto(): ID:" + currentItemID);
-            console.log("callUpdateLocSto(): Value:" + currentItemValue); 
-            console.log("callUpdateLocSto(): " + currentItem)
+            
+            console.table(currentItem)
 
             addNewItem(currentItemID, currentItemValue);
         }
@@ -89,7 +73,7 @@ function clearListEl (){
     } else {
             console.log("callUpdateLocSto(): LS length is " + localStorage.length);
             imgEl.src = originalImagePath;
-            listEl.innerHTML = "No items here... yet :)"
+            listEl.innerHTML = "No items here, yet :)"
         }
 
 }
@@ -97,15 +81,16 @@ function clearListEl (){
 function addNewItem(itemID, itemValue){
 
     const li = document.createElement("li");
-    console.log("addNewItem(): This is items's ID = " + `${itemID}`);
-    console.log("addNewItem(): This is items's value = " + `${itemValue}`);
+    //CHECKING FOR PASSED VALUES 
+    console.log("addNewItem(): Passed ID = " + `${itemID}`);
+    console.log("addNewItem(): Passed value = " + `${itemValue}`);
 
     li.append(itemValue);
     listEl.append(li);
     
     li.addEventListener("dblclick", function () {     
 
-        remove(itemID);
+        removeFromLocSto(itemID);
     })
 }
 

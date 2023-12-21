@@ -37,6 +37,7 @@ input {
     font-size: medium;
     width: 100%;
     box-sizing: border-box;
+    user-select: none;
     
 }
 
