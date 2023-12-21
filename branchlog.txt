@@ -14,6 +14,11 @@ noodlesEasterEgg - Adds new Easter Egg: when user enters the word "noodles" (cas
 upd001 - adds branchlog text-type file to keep track of updates and issues history.
                 + text-file "branchlog" added to the file system
 
+upd04 - Adds 3D effect to "Add to card" button
+                + changes color of main button 
+                + adds shadow to the button 
+                + takes callUpdateLocSto() method outside of pushToLocSto()              
+        
 TEMPLATE
 [branch name] - [branch description]
                 + [code/function modifications]
