@@ -13,7 +13,6 @@ let globalItemIDNumber = localStorage.length; // stores ID of last item in datab
 const pushToLocSto = (value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
     localStorage.setItem(globalItemIDNumber, value);
-    callUpdateLocSto();
 }
 
 const removeFromLocSto = (itemID) => {
@@ -24,6 +23,7 @@ const removeFromLocSto = (itemID) => {
 addBtn.addEventListener("click", function () {
     if(inputEl.value.trim() != ""){
         pushToLocSto(inputEl.value);
+        callUpdateLocSto();
     }
     
     clearInputFieldReference();
