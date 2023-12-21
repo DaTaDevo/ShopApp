@@ -22,7 +22,10 @@ const removeFromLocSto = (itemID) => {
 }
 
 addBtn.addEventListener("click", function () {
-    pushToLocSto(inputEl.value);
+    if(inputEl.value.trim() != ""){
+        pushToLocSto(inputEl.value);
+    }
+    
     clearInputFieldReference();
 })
 
@@ -44,7 +47,7 @@ function clearListEl (){
     listEl.innerHTML = ""; //clearing list before updating data
 }
  
- function callUpdateLocSto() { // calls LocalStorage to update the list
+function callUpdateLocSto() { // calls LocalStorage to update the list
 
 
     clearListEl();
