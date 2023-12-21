@@ -67,7 +67,11 @@ function callUpdateLocSto() { // calls LocalStorage to update the list
                 imgEl.src = easterEggRamenImagePath;
 
             } // ADD NOODLES EASTER EGG HERE ______________ @Paul
-            
+            if (currentItemValue.toLowerCase() === 'noodles') {
+                
+                imgEl.src = "assets/noodles_girl.jpg";
+
+            }
             console.table(currentItem)
 
             addNewItem(currentItemID, currentItemValue);
