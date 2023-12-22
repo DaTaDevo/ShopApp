@@ -14,12 +14,12 @@ let globalItemIDNumber = localStorage.length; // stores ID of last item in datab
 const pushToLocSto = (value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
     localStorage.setItem(globalItemIDNumber, value);
-    callUpdateLocSto();
+    updateList();
 }
 
 const removeFromLocSto = (itemID) => {
     localStorage.removeItem(itemID);
-    callUpdateLocSto();
+    updateList();
 }
 
 addBtn.addEventListener("click", function () {
@@ -58,15 +58,12 @@ updateList() {
                                                                 addItemToList() - add item to the list 
                                                                 showItemCount() - shows how many items in the list
                                                 
-
 }
 
 */
 
 
 /*
-
-
 const checkEasterEgg = (const itemValue) => {
     for (const easterTag of easterTags["tag"]){
 
@@ -77,12 +74,7 @@ const showItemCount = () => {
         array.map((array.item) => {function}) 
 }
 
-
-const parseArray= (array, ...methods) => {
- ...
 }
-
-
 const updateList = () => {
 
     clearListEl(); 
@@ -92,62 +84,60 @@ const updateList = () => {
     showItemCount(globalIDNumber);
 
 }
-
-
 */
 
-function callUpdateLocSto() { // calls LocalStorage to update the list
+const parseArray = (array, ...methods) => { //method that performs any passed methods to item of array; methods MUST have receive ONLY ONE parameter;
+ 
+    array.map((item) => {
+        for (const method of methods){
+             method(item)  
+        }
+    })
 
+}
+
+const showItemCount = (itemNumber) => {countEl.innerHTML = itemNumber == 1 ? `${itemNumber} item` : `${itemNumber} items`};
+
+function updateList() { // calls LocalStorage to update the list
 
     clearListEl();
         
     if(!locStoIsEmpty()){ // check if localStorage is empty 
 
-        console.log("callUpdateLocSto(): LS length is " + localStorage.length);
-
-        const shoppingArray = Object.entries(localStorage); // copy localStorage to local array
-        for(let currentItem of shoppingArray){ // parse through every element
-
-            let currentItemID = currentItem[0]; 
-            let currentItemValue = currentItem[1]
-            
-            if(currentItemValue.toLowerCase() === 'ramen') { // check if any is EasterEgg
-                imgEl.src = easterEggRamenImagePath;
-            
-            } else if (currentItemValue.toLowerCase() === 'noodles') {
-
-                            imgEl.src = "assets/noodles_girl.jpg";
-            }
-
-            console.table(currentItem)
-
-            addItemToList(currentItemID, currentItemValue); //add item to list to display
-        }
+        console.log("updateList(): LS length is " + localStorage.length);
+        
+        parseArray(Object.entries(localStorage), addItemToList);
 
     } else { // if localStorage is empty shows message 
-            console.log("callUpdateLocSto(): LS length is " + localStorage.length);
+            console.log("updateList(): LS length is " + localStorage.length);
+
             imgEl.src = originalImagePath; //if any changes were made by EasterEgg images, it reverts it back.
-            listEl.innerHTML = "No items here, yet :)"// the message 
-        }
+            globalItemIDNumber = 0;
+    }
+    
+    showItemCount(localStorage.length);
 
 }
 
-function addItemToList(itemID, itemValue){
+function addItemToList(item){
 //Capitalize itemValue
-    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1).toLowerCase();
+    const itemID = item[0];
+    let itemValue = item[1];
+
+    console.log(`addItemToList(): Passed ID = ${itemID}`);
+    console.log(`addItemToList(): Passed value = " + ${itemValue}`);
+
+    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1).toLowerCase(); // make seprate function
 
     const li = document.createElement("li");
-    //CHECKING FOR PASSED VALUES 
-    console.log("addItemToList(): Passed ID = " + `${itemID}`);
-    console.log("addItemToList(): Passed value = " + `${itemValue}`);
+   
 
     li.append(itemValue);
     listEl.append(li);
     
-    li.addEventListener("dblclick", function () {     
-
+    li.addEventListener("dblclick", () => {     
         removeFromLocSto(itemID);
     })
 }
 
-document.addEventListener("DOMContentLoaded", callUpdateLocSto());
+document.addEventListener("DOMContentLoaded", updateList());

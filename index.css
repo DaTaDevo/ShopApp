@@ -93,6 +93,12 @@ ul li:hover {
     cursor: pointer;
 }
 
+#item-count {
+    margin-top:5px;
+    text-align: center;
+    color: #A6AAB2;
+}
+
 @font-face {
     font-family: "PixelFont";
     src: url(pixeloid-font/PixeloidSansBold-PKnYd.ttf);

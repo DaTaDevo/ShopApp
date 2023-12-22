@@ -27,6 +27,8 @@ opt1 - Optimizes code in index.js (IP)
                 + changes getElementById to querySelector method
                 + renames callUpdateLocSto method into updateList metho
                 + breaks down updateList method into several methods for flexibility
+                + adds methods such as showItemCount and parseArray
+                + 
 
 
 TEMPLATE
