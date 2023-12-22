@@ -49,6 +49,7 @@ function clearListEl (){
 }
 
 /*
+PSEUDO-CODE 
 
 updateList() {
 
@@ -64,9 +65,6 @@ updateList() {
 
 
 /*
-
-
-
 
 
 const checkEasterEgg = (const itemValue) => {
@@ -86,7 +84,6 @@ const updateList = () => {
     clearListEl(); 
 
     parseArray(Object.entries(localStorage), checkEasterEgg(), addItemToList());
-
     showItemCount(globalIDNumber);
 
 }

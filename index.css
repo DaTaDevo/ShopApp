@@ -97,13 +97,3 @@ ul li:hover {
     font-family: "PixelFont";
     src: url(pixeloid-font/PixeloidSansBold-PKnYd.ttf);
 }
-
-
-@keyframes onLoad {
-    from{
-        opacity: 0%;
-    }
-    to {
-        opacity: 100%;
-    }
-}
