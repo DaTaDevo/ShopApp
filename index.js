@@ -13,6 +13,7 @@ let globalItemIDNumber = localStorage.length; // stores ID of last item in datab
 const pushToLocSto = (value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
     localStorage.setItem(globalItemIDNumber, value);
+    callUpdateLocSto();
 }
 
 const removeFromLocSto = (itemID) => {
@@ -23,7 +24,6 @@ const removeFromLocSto = (itemID) => {
 addBtn.addEventListener("click", function () {
     if(inputEl.value.trim() != ""){
         pushToLocSto(inputEl.value);
-        callUpdateLocSto();
     }
     
     clearInputFieldReference();
@@ -63,14 +63,13 @@ function callUpdateLocSto() { // calls LocalStorage to update the list
             let currentItemValue = currentItem[1]
             
             if(currentItemValue.toLowerCase() === 'ramen') {
-
                 imgEl.src = easterEggRamenImagePath;
-
+            
             } else if (currentItemValue.toLowerCase() === 'noodles') {
-                
-                imgEl.src = "assets/noodles_girl.jpg";
 
+                            imgEl.src = "assets/noodles_girl.jpg";
             }
+
             console.table(currentItem)
 
             addNewItem(currentItemID, currentItemValue);
@@ -85,6 +84,8 @@ function callUpdateLocSto() { // calls LocalStorage to update the list
 }
 
 function addNewItem(itemID, itemValue){
+//Capitalize itemValue
+    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1).toLowerCase();
 
     const li = document.createElement("li");
     //CHECKING FOR PASSED VALUES 

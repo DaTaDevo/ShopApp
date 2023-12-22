@@ -37,10 +37,11 @@ button {
     box-sizing: border-box;
     font-family: 'PixelFont', sans-serif;
     font-size: medium;
-    border:none;
+    border-width: 2px;
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 7px;
+    
     color: #FDFDFD;
     background-color: #de6a7b;
     width: 100%;
