@@ -119,6 +119,16 @@ function updateList() { // calls LocalStorage to update the list
 
 }
 
+function easterEgg(userInput){
+    //EasterEggs image paths stored in object. 
+    const easterEggs = {'Ramen':"assets/ramen_girl.png",'Noodles':"assets/noodles_girl.jpg"};
+
+    //Cheking if user input exists in easterEggs and return image path.
+    if (userInput in easterEggs){
+        return(easterEggs[userInput]);
+    } 
+}
+
 function addItemToList(item){
 //Capitalize itemValue
     const itemID = item[0];
