@@ -1,20 +1,12 @@
-const numbers = [1,2,3,4]; //array
 
+//Take user input and return image path if input is exist in easterEggs.
+function easterEgg(userInput){
+    //EasterEggs image paths stored in object. 
+    const easterEggs = {'Ramen':"assets/ramen_girl.png",'Noodles':"assets/noodles_girl.jpg"};
 
-const square = (x) => {console.log("this is square func: " + x*x)}; //func1 
-
-const sum = (x) => { console.log("this is sum func: " + x+x)}; //func2 
-
-function check (array, ...methods) {
-    
-    array.map((x) => {
-        
-        for(const method of methods){
-            method(x); 
-        }
-    })
-
+    //Cheking if user input exists in easterEggs and return image path.
+    if (userInput in easterEggs){
+        return(easterEggs[userInput]);
+    } 
 }
 
-
-check(numbers, square, sum); 

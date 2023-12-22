@@ -14,12 +14,12 @@ let globalItemIDNumber = localStorage.length; // stores ID of last item in datab
 const pushToLocSto = (value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
     localStorage.setItem(globalItemIDNumber, value);
-    updateList();
+    callUpdateLocSto();
 }
 
 const removeFromLocSto = (itemID) => {
     localStorage.removeItem(itemID);
-    updateList();
+    callUpdateLocSto();
 }
 
 addBtn.addEventListener("click", function () {
@@ -49,7 +49,6 @@ function clearListEl (){
 }
 
 /*
-PSEUDO-CODE 
 
 updateList() {
 
@@ -58,12 +57,18 @@ updateList() {
                                                                 addItemToList() - add item to the list 
                                                                 showItemCount() - shows how many items in the list
                                                 
+
 }
 
 */
 
 
 /*
+
+
+
+
+
 const checkEasterEgg = (const itemValue) => {
     for (const easterTag of easterTags["tag"]){
 
@@ -71,73 +76,87 @@ const checkEasterEgg = (const itemValue) => {
 }
 
 const showItemCount = () => {
-        array.map((array.item) => {function}) 
-}
 
 }
+
+
+
 const updateList = () => {
 
     clearListEl(); 
 
-    parseArray(Object.entries(localStorage), methods);
+    parseArray(Object.entries(localStorage), checkEasterEgg(), addItemToList());
 
     showItemCount(globalIDNumber);
 
 }
+
+
 */
 
-const parseArray = (array, ...methods) => { //method that performs any passed methods to item of array; methods MUST have receive ONLY ONE parameter;
- 
-    array.map((item) => {
-        for (const method of methods){
-             method(item)  
-        }
-    })
+function callUpdateLocSto() { // calls LocalStorage to update the list
 
-}
-
-const showItemCount = (itemNumber) => {countEl.innerHTML = itemNumber == 1 ? `${itemNumber} item` : `${itemNumber} items`};
-
-function updateList() { // calls LocalStorage to update the list
 
     clearListEl();
         
     if(!locStoIsEmpty()){ // check if localStorage is empty 
 
-        console.log("updateList(): LS length is " + localStorage.length);
-        
-        parseArray(Object.entries(localStorage), addItemToList);
+        console.log("callUpdateLocSto(): LS length is " + localStorage.length);
+
+        const shoppingArray = Object.entries(localStorage); // copy localStorage to local array
+        for(let currentItem of shoppingArray){ // parse through every element
+
+            let currentItemID = currentItem[0]; 
+            let currentItemValue = currentItem[1]
+            
+            if(currentItemValue.toLowerCase() === 'ramen') { // check if any is EasterEgg
+                imgEl.src = easterEggRamenImagePath;
+            
+            } else if (currentItemValue.toLowerCase() === 'noodles') {
+
+                            imgEl.src = "assets/noodles_girl.jpg";
+            }
+
+            console.table(currentItem)
+
+            addItemToList(currentItemID, currentItemValue); //add item to list to display
+        }
 
     } else { // if localStorage is empty shows message 
-            console.log("updateList(): LS length is " + localStorage.length);
-
+            console.log("callUpdateLocSto(): LS length is " + localStorage.length);
             imgEl.src = originalImagePath; //if any changes were made by EasterEgg images, it reverts it back.
-            globalItemIDNumber = 0;
-    }
-    
-    showItemCount(localStorage.length);
+            listEl.innerHTML = "No items here, yet :)"// the message 
+        }
 
 }
 
-function addItemToList(item){
+//Take user input and return image path if input is exist in easterEggs.
+function easterEgg(userInput){
+    //EasterEggs image paths stored in object. 
+    const easterEggs = {'Ramen':"assets/ramen_girl.png",'Noodles':"assets/noodles_girl.jpg"};
+
+    //Cheking if user input exists in easterEggs and return image path.
+    if (userInput in easterEggs){
+        return(easterEggs[userInput]);
+    } 
+}
+
+function addItemToList(itemID, itemValue){
 //Capitalize itemValue
-    const itemID = item[0];
-    let itemValue = item[1];
-
-    console.log(`addItemToList(): Passed ID = ${itemID}`);
-    console.log(`addItemToList(): Passed value = " + ${itemValue}`);
-
-    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1).toLowerCase(); // make seprate function
+    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1).toLowerCase();
 
     const li = document.createElement("li");
-   
+    //CHECKING FOR PASSED VALUES 
+    console.log("addItemToList(): Passed ID = " + `${itemID}`);
+    console.log("addItemToList(): Passed value = " + `${itemValue}`);
 
     li.append(itemValue);
     listEl.append(li);
     
-    li.addEventListener("dblclick", () => {     
+    li.addEventListener("dblclick", function () {     
+
         removeFromLocSto(itemID);
     })
 }
 
-document.addEventListener("DOMContentLoaded", updateList());
+document.addEventListener("DOMContentLoaded", callUpdateLocSto());
