@@ -1,20 +1,13 @@
-const numbers = [1,2,3,4]; //array
+const numbers = {
+    one : 1,
+    two : 2, 
+    three : 3
+}
 
+const foo = (obj) =>{
 
-const square = (x) => {console.log("this is square func: " + x*x)}; //func1 
-
-const sum = (x) => { console.log("this is sum func: " + x+x)}; //func2 
-
-function check (array, ...methods) {
-    
-    array.map((x) => {
-        
-        for(const method of methods){
-            method(x); 
-        }
-    })
+    console.log(Object.entries(obj))
 
 }
 
-
-check(numbers, square, sum); 
+foo(numbers)

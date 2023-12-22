@@ -28,7 +28,14 @@ opt1 - Optimizes code in index.js (IP)
                 + renames callUpdateLocSto method into updateList metho
                 + breaks down updateList method into several methods for flexibility
                 + adds methods such as showItemCount and parseArray
-                + 
+                + adds counter of items to home
+                + creates new DOM element #item-count (index.html)
+
+opt2 - Makes methods more universal to work with other database
+                + renames methods to add and remove from localStorage into more universal names such as removeFromDatabase and addToDatabase 
+                + adds capitalizeValue method to capitalize input of user
+                + re-renders updateList method to receive an object (database) and pass it as working database to make the function more universal in the future
+                + re-renders locStoIsEmpty into databaseIsEmpty to check if passed database is empty. 
 
 
 TEMPLATE

@@ -7,24 +7,24 @@ const originalImagePath = "assets/girl-rmbg.png"
 const easterEggRamenImagePath = "assets/ramen_girl.png";
 // ADD NEW EASTER EGGG FOR NOODELS PATH TO IMAGE HERE 
 
-const locStoIsEmpty = () => (localStorage.length == 0);
+const databaseIsEmpty = (database) => (database.length == 0);
 
 let globalItemIDNumber = localStorage.length; // stores ID of last item in database
 
-const pushToLocSto = (value) => { // pushes value to the localStorage and returns its ID number in localStorage
+const pushToDatabase = (database, value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
     localStorage.setItem(globalItemIDNumber, value);
-    updateList();
+    updateList(database);
 }
 
-const removeFromLocSto = (itemID) => {
+const removeFromDatbase = (database, itemID) => {
     localStorage.removeItem(itemID);
-    updateList();
+    updateList(database);
 }
 
 addBtn.addEventListener("click", function () {
     if(inputEl.value.trim() != ""){
-        pushToLocSto(inputEl.value);
+        pushToDatabase(localStorage, inputEl.value);
     }
     
     clearInputFieldReference();
@@ -48,43 +48,6 @@ function clearListEl (){
     listEl.innerHTML = ""; //clearing list before updating data
 }
 
-/*
-PSEUDO-CODE 
-
-updateList() {
-
-  clearList() -> parseArray(array, ...methods) -> array.item => checkEasterEgg()  - check if any item triggers EasterEgg
-                                                                addIconToItem() - IP
-                                                                addItemToList() - add item to the list 
-                                                                showItemCount() - shows how many items in the list
-                                                
-}
-
-*/
-
-
-/*
-const checkEasterEgg = (const itemValue) => {
-    for (const easterTag of easterTags["tag"]){
-
-    }
-}
-
-const showItemCount = () => {
-        array.map((array.item) => {function}) 
-}
-
-}
-const updateList = () => {
-
-    clearListEl(); 
-
-    parseArray(Object.entries(localStorage), methods);
-
-    showItemCount(globalIDNumber);
-
-}
-*/
 
 const parseArray = (array, ...methods) => { //method that performs any passed methods to item of array; methods MUST have receive ONLY ONE parameter;
  
@@ -98,26 +61,30 @@ const parseArray = (array, ...methods) => { //method that performs any passed me
 
 const showItemCount = (itemNumber) => {countEl.innerHTML = itemNumber == 1 ? `${itemNumber} item` : `${itemNumber} items`};
 
-function updateList() { // calls LocalStorage to update the list
+const updateList = (database) => { // calls LocalStorage to update the list
 
+    console.log(localStorage);
     clearListEl();
         
-    if(!locStoIsEmpty()){ // check if localStorage is empty 
+    if(!databaseIsEmpty(database)){ // check if localStorage is empty 
 
-        console.log("updateList(): LS length is " + localStorage.length);
+        console.log("updateList(): LS length is " + database.length);
         
-        parseArray(Object.entries(localStorage), addItemToList);
+        parseArray(Object.entries(database), addItemToList);
 
     } else { // if localStorage is empty shows message 
-            console.log("updateList(): LS length is " + localStorage.length);
+            console.log("updateList(): LS length is " + database.length);
 
             imgEl.src = originalImagePath; //if any changes were made by EasterEgg images, it reverts it back.
             globalItemIDNumber = 0;
     }
     
-    showItemCount(localStorage.length);
+    showItemCount(database.length);
 
 }
+
+
+const capitalizeValue = (value) => (value.charAt(0).toUpperCase() + value.slice(1).toLowerCase())   
 
 function addItemToList(item){
 //Capitalize itemValue
@@ -127,17 +94,16 @@ function addItemToList(item){
     console.log(`addItemToList(): Passed ID = ${itemID}`);
     console.log(`addItemToList(): Passed value = " + ${itemValue}`);
 
-    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1).toLowerCase(); // make seprate function
+    itemValue = capitalizeValue(itemValue);
 
     const li = document.createElement("li");
    
-
     li.append(itemValue);
     listEl.append(li);
     
     li.addEventListener("dblclick", () => {     
-        removeFromLocSto(itemID);
+        removeFromDatbase(localStorage, itemID);
     })
 }
 
-document.addEventListener("DOMContentLoaded", updateList());
+document.addEventListener("DOMContentLoaded", updateList(localStorage));
