@@ -19,8 +19,15 @@ upd04 - Adds 3D effect to "Add to card" button
                 + adds shadow to the button 
                 + takes callUpdateLocSto() method outside of pushToLocSto() 
 
-upper - Capitalize user input
-                + add border to "Add to Cart" button 
+upper - Capitalizes user input
+                + adds border to "Add to Cart" button 
+
+opt1 - Optimizes code in index.js (IP)
+                + changes characteristics of border of 'Add to cart' button (index.css)
+                + changes getElementById to querySelector method
+                + renames callUpdateLocSto method into updateList metho
+                + breaks down updateList method into several methods for flexibility
+
 
 TEMPLATE
 [branch name] - [branch description]
