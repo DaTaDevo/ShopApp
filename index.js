@@ -74,16 +74,21 @@ const checkEasterEgg = (const itemValue) => {
 }
 
 const showItemCount = () => {
-
+        array.map((array.item) => {function}) 
 }
 
+
+const parseArray= (array, ...methods) => {
+ ...
+}
 
 
 const updateList = () => {
 
     clearListEl(); 
 
-    parseArray(Object.entries(localStorage), checkEasterEgg(), addItemToList());
+    parseArray(Object.entries(localStorage), methods);
+
     showItemCount(globalIDNumber);
 
 }

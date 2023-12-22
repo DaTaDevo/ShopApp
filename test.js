@@ -8,6 +8,7 @@ const sum = (x) => { console.log("this is sum func: " + x+x)}; //func2
 function check (array, ...methods) {
     
     array.map((x) => {
+        
         for(const method of methods){
             method(x); 
         }
