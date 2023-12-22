@@ -17,8 +17,11 @@ upd001 - adds branchlog text-type file to keep track of updates and issues histo
 upd04 - Adds 3D effect to "Add to card" button
                 + changes color of main button 
                 + adds shadow to the button 
-                + takes callUpdateLocSto() method outside of pushToLocSto()              
-        
+                + takes callUpdateLocSto() method outside of pushToLocSto() 
+
+upper - Capitalize user input
+                + add border to "Add to Cart" button 
+
 TEMPLATE
 [branch name] - [branch description]
                 + [code/function modifications]
