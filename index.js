@@ -5,6 +5,7 @@ const imgEl = document.querySelector("img")
 const countEl = document.querySelector("#item-count")
 const originalImagePath = "assets/girl-rmbg.png"
 const easterEggRamenImagePath = "assets/ramen_girl.png";
+const easterEggs = {'Ramen':"assets/ramen_girl.png",'Noodles':"assets/noodles_girl.jpg"};
 // ADD NEW EASTER EGGG FOR NOODELS PATH TO IMAGE HERE 
 
 const locStoIsEmpty = () => (localStorage.length == 0);
@@ -48,44 +49,6 @@ function clearListEl (){
     listEl.innerHTML = ""; //clearing list before updating data
 }
 
-/*
-PSEUDO-CODE 
-
-updateList() {
-
-  clearList() -> parseArray(array, ...methods) -> array.item => checkEasterEgg()  - check if any item triggers EasterEgg
-                                                                addIconToItem() - IP
-                                                                addItemToList() - add item to the list 
-                                                                showItemCount() - shows how many items in the list
-                                                
-}
-
-*/
-
-
-/*
-const checkEasterEgg = (const itemValue) => {
-    for (const easterTag of easterTags["tag"]){
-
-    }
-}
-
-const showItemCount = () => {
-        array.map((array.item) => {function}) 
-}
-
-}
-const updateList = () => {
-
-    clearListEl(); 
-
-    parseArray(Object.entries(localStorage), methods);
-
-    showItemCount(globalIDNumber);
-
-}
-*/
-
 const parseArray = (array, ...methods) => { //method that performs any passed methods to item of array; methods MUST have receive ONLY ONE parameter;
  
     array.map((item) => {
@@ -120,13 +83,13 @@ function updateList() { // calls LocalStorage to update the list
 }
 
 function easterEgg(userInput){
-    //EasterEggs image paths stored in object. 
-    const easterEggs = {'Ramen':"assets/ramen_girl.png",'Noodles':"assets/noodles_girl.jpg"};
-
     //Cheking if user input exists in easterEggs and return image path.
-    if (userInput in easterEggs){
-        return(easterEggs[userInput]);
+    if (userInput[1] in easterEggs){
+        imgEl.src = easterEggs[userInput[1]];
     } 
+    else{
+        imgEl.src = originalImagePath;
+    }
 }
 
 function addItemToList(item){
