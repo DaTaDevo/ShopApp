@@ -6,22 +6,23 @@ const countEl = document.querySelector("#item-count")
 const originalImagePath = "assets/girl-rmbg.png"
 const easterEggRamenImagePath = "assets/ramen_girl.png";
 const easterEggs = {'Ramen':"assets/ramen_girl.png"};
+const DATABASE = localStorage; 
 
 //add SET_GLOBAL_DATABASE method to simplify the work with any object-based database
 
-const databaseIsEmpty = (database) => (database.length == 0);
+const databaseIsEmpty = () => (DATABASE.length == 0);
 
 let globalItemIDNumber = localStorage.length; // stores ID of last item in database
 
-const pushToDatabase = (database, value) => { // pushes value to the localStorage and returns its ID number in localStorage
+const pushToDatabase = ( value) => { // pushes value to the localStorage and returns its ID number in localStorage
     globalItemIDNumber++; 
-    localStorage.setItem(globalItemIDNumber, value);
-    updateList(database);
+    DATABASE.setItem(globalItemIDNumber, value);
+    updateList();
 }
 
-const removeFromDatbase = (database, itemID) => {
-    localStorage.removeItem(itemID);
-    updateList(database);
+const removeFromDatbase = (itemID) => {
+    DATABASE.removeItem(itemID);
+    updateList();
 }
 
 const processInputValue = (value) => ((value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()).trim())   
@@ -31,7 +32,7 @@ addBtn.addEventListener("click", function () {
     const inputValue = processInputValue(inputEl.value);
     if(inputValue != ""){
 
-        pushToDatabase(localStorage, inputValue);
+        pushToDatabase(inputValue);
     }
     
     clearInputFieldReference();
@@ -70,25 +71,25 @@ const showItemCount = (itemNumber) => {countEl.innerHTML = itemNumber == 1 ? `${
 const IsEasterEgg = (item) => { if (item[1] in easterEggs){ imgEl.src = easterEggs[item[1]]}}
 
 
-const updateList = (database) => { // calls LocalStorage to update the list
+const updateList = () => { // calls LocalStorage to update the list
 
-    console.log(localStorage);
+    console.log(`LocalStorage is ${localStorage}`);
     clearListEl();
         
-    if(!databaseIsEmpty(database)){ // check if localStorage is empty 
+    if(!databaseIsEmpty()){ // check if localStorage is empty 
 
-        console.log("updateList(): LS length is " + database.length);
+        console.log("updateList(): LS length is " + DATABASE.length);
         
-        parseArray(Object.entries(database), addItemToList, IsEasterEgg);
+        parseArray(Object.entries(DATABASE), addItemToList, IsEasterEgg);
 
     } else { // if localStorage is empty shows message 
-            console.log("updateList(): LS length is " + database.length);
+            console.log("updateList(): LS length is " + DATABASE.length);
 
             imgEl.src = originalImagePath; //if any changes were made by EasterEgg images, it reverts it back.
             globalItemIDNumber = 0;
     }
     
-    showItemCount(database.length);
+    showItemCount(DATABASE.length);
 
 }
 
@@ -109,8 +110,8 @@ function addItemToList(item){
     listEl.append(li);
     
     li.addEventListener("dblclick", () => {     
-        removeFromDatbase(localStorage, itemID);
+        removeFromDatbase( itemID);
     })
 }
 
-document.addEventListener("DOMContentLoaded", updateList(localStorage));
+document.addEventListener("DOMContentLoaded", updateList());
