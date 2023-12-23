@@ -5,7 +5,7 @@ const imgEl = document.querySelector("img")
 const countEl = document.querySelector("#item-count")
 const originalImagePath = "assets/girl-rmbg.png"
 const easterEggRamenImagePath = "assets/ramen_girl.png";
-const easterEggs = {'Ramen':"assets/ramen_girl.png",'Noodles':"assets/noodles_girl.jpg"};
+const easterEggs = {'Ramen':"assets/ramen_girl.png"};
 // ADD NEW EASTER EGGG FOR NOODELS PATH TO IMAGE HERE 
 
 const locStoIsEmpty = () => (localStorage.length == 0);
@@ -24,8 +24,9 @@ const removeFromLocSto = (itemID) => {
 }
 
 addBtn.addEventListener("click", function () {
-    if(inputEl.value.trim() != ""){
-        pushToLocSto(inputEl.value);
+    const inputValue = inputEl.value.trim(); //modifying the string
+    if(inputValue != ""){
+        pushToLocSto(inputValue);
     }
     
     clearInputFieldReference();
@@ -61,6 +62,8 @@ const parseArray = (array, ...methods) => { //method that performs any passed me
 
 const showItemCount = (itemNumber) => {countEl.innerHTML = itemNumber == 1 ? `${itemNumber} item` : `${itemNumber} items`};
 
+const IsEasterEgg = (item) => { if (item[1] in easterEggs){ imgEl.src = easterEggs[item[1]]}}
+
 function updateList() { // calls LocalStorage to update the list
 
     clearListEl();
@@ -69,7 +72,7 @@ function updateList() { // calls LocalStorage to update the list
 
         console.log("updateList(): LS length is " + localStorage.length);
         
-        parseArray(Object.entries(localStorage), addItemToList);
+        parseArray(Object.entries(localStorage), addItemToList, IsEasterEgg);
 
     } else { // if localStorage is empty shows message 
             console.log("updateList(): LS length is " + localStorage.length);
@@ -80,16 +83,6 @@ function updateList() { // calls LocalStorage to update the list
     
     showItemCount(localStorage.length);
 
-}
-
-function easterEgg(userInput){
-    //Cheking if user input exists in easterEggs and return image path.
-    if (userInput[1] in easterEggs){
-        imgEl.src = easterEggs[userInput[1]];
-    } 
-    else{
-        imgEl.src = originalImagePath;
-    }
 }
 
 function addItemToList(item){
